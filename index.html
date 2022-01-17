@@ -92,7 +92,7 @@
 
             hitung.addEventListener('click', (e) => {
                 e.preventDefault()
-                const total = Math.round(Number(modal.value)*rate + (Number(modal.value)*rate*pct))
+                const total = Math.round(Number(modal.value)*rate + (Number(modal.value)*rate*pct) + okir)
                 harga.innerHTML = `Modal: Rp ${addCommas(total)}`
                 harga10.innerHTML = `Harga +10%: Rp ${addCommas(Math.trunc(total * 1.1))}`
                 harga20.innerHTML = `Harga +20%: Rp ${addCommas(Math.trunc(total * 1.2))}`
