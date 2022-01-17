@@ -5,16 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet">
     <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+        html {
+            height: 100vh;
+            display: block;
+        }
         body {
+            height: 100%;
+            display: block;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
-        div {
+        .wrapper {
             display: flex;
             justify-content: center;
             flex-direction: column;
-            width: 40%;
-            margin: 10% auto;
+            width: 90%;
+            max-width: 370px;
+            height: 100%;
+            margin: auto;
+
         }
         form {
             width: 100%;
@@ -27,9 +40,14 @@
             border-radius: 5px;
             padding: 4px;
         }
-        #harga {
+        .text {
             font-weight: bold;
             text-align: center;
+            margin-top: 10px;
+            text-align: left;
+        }
+        #harga {
+            font-weight: bold;
             display: block;
             margin-top: 20px;
         }
@@ -37,18 +55,27 @@
 </head>
 <body>
 
-    <div>
+    <div class="wrapper">
         <form>
             <input id="modal" type="number" autocomplete="off">
             <button id='hitung'>HITUNG</button>
         </form>
-        <span id='harga'></span>
+        <span id='harga' class="text"></span>
+        <span id='harga10' class="text"></span>
+        <span id='harga20' class="text"></span>
+        <span id='hargaKarung' class="text"></span>
+
+
+
     </div>
 
     <script>
         window.addEventListener('DOMContentLoaded', e => {
             const modal = document.querySelector('#modal')
             const harga = document.querySelector('#harga')
+            const harga10 = document.querySelector('#harga10')
+            const harga20 = document.querySelector('#harga20')
+            const hargaKarung = document.querySelector('#hargaKarung')
             const rate = 2450
             const okir = 20588
             const pct = .3
@@ -65,10 +92,11 @@
 
             hitung.addEventListener('click', (e) => {
                 e.preventDefault()
-                const total = Number(modal.value)*rate + (Number(modal.value)*rate*pct)
-
-                harga.innerHTML = `Rp ${addCommas(total)}`
-
+                const total = Math.round(Number(modal.value)*rate + (Number(modal.value)*rate*pct))
+                harga.innerHTML = `Modal: Rp ${addCommas(total)}`
+                harga10.innerHTML = `Harga +10%: Rp ${addCommas(Math.trunc(total * 1.1))}`
+                harga20.innerHTML = `Harga +20%: Rp ${addCommas(Math.trunc(total * 1.2))}`
+                hargaKarung.innerHTML = `Harga +20% (karung): Rp ${addCommas(Math.trunc(total * 1.2 * 50))}`
             })
         })
     </script>
